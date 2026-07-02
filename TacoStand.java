@@ -45,7 +45,7 @@ public class TacoStand
 			TacoStand.BAR, TacoStand.BAR, 
       "Funds Available:", TacoStand.totalFunds, TacoStand.BAR,
       "# of Asada Left:", TacoStand.numAsada,
-			"# of Pollo Left:", TacoStand.numPollo,
+				"# of Pollo Left:", TacoStand.numPollo,
       "# of Lengua Left:", TacoStand.numLengua,
       "# of Ultimate Left:",TacoStand.numUltimate, TacoStand.BAR);
 	}
@@ -74,14 +74,20 @@ public class TacoStand
 		//tacos cost 75 cents each in supplies, keeping it simple
 	    int tacosEach = (int)(Math.round(budget / 0.75 / 4));
 
-	    TacoStand.totalFunds -= budget;
+		if (budget <= TacoStand.totalFunds)
+		{
+			TacoStand.totalFunds -= budget;
 
-	    TacoStand.numAsada += tacosEach;
-	    TacoStand.numPollo += tacosEach;
-	    TacoStand.numLengua += tacosEach;
-	    TacoStand.numUltimate += tacosEach;
+			TacoStand.numAsada += tacosEach;
+			TacoStand.numPollo += tacosEach;
+			TacoStand.numLengua += tacosEach;
+			TacoStand.numUltimate += tacosEach;
+			return true;
+		}
+		else {
+            return false;
+        }
 
-		return true;  //TODO: this is stubbed, replace this line with your actual code!
 	}
 
 	/**
@@ -91,9 +97,23 @@ public class TacoStand
 	 * @param tacoOption menu option (kind of taco)
 	 * @param numTacos number of tacos as part of order, assume > 0
 	 */
-	public static void updateTotalFunds(int tacoOption, int numTacos)
+	public static <tacoOption> void updateTotalFunds(int tacoOption, int numTacos)
 	{
-		//TODO: this is stubbed, replace this line with your actual code!
+				{
+				// Carne Asada ($2.50)
+					TacoStand.numAsada -= numTacos;
+					TacoStand.totalFunds += (2.50 * numTacos);
+				// Pollo Asado ($1.75)
+					TacoStand.numPollo -= numTacos;
+					TacoStand.totalFunds += (1.75 * numTacos);
+				// Lengua ($3.00)
+					TacoStand.numLengua -= numTacos;
+					TacoStand.totalFunds += (3.00 * numTacos);
+				// Ultimate Taco ($18.00)
+					TacoStand.numUltimate -= numTacos;
+					TacoStand.totalFunds += (18.00 * numTacos);
+			}
+
 	}
 	
 	
@@ -107,6 +127,9 @@ public class TacoStand
 	 */
 	public static boolean areTacosAvailable(int tacoOption, int numTacos)
 	{
-		return false; //TODO: this is stubbed, replace this line with your actual code!
-	}
+		if (numTacos <= 0) {
+			return false;
+		}
+        return false;
+    }
 }
