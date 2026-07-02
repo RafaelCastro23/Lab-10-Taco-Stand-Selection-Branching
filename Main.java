@@ -1,7 +1,7 @@
-// PARTNER NAME:
+// PARTNER NAME: Rafael Castro
 // PARTNER NAME:
 // CS111 SECTION #:
-// DATE:
+// DATE: 7/2/2026
 
 public class Main
 {
