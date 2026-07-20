@@ -2,6 +2,7 @@ public class TacoStand
 {
     /* CONSTANT VARIABLES */
 	public static final String BAR = "----------------------------------------";
+	public static final int ASADA_OPTION = 1, POLLO_OPTION = 2, LENGUA_OPTION = 3, ULTIMATE_OPTION = 4;
 
 	/* STATIC VARIABLES */
 	private static int numAsada = 0, numPollo = 0, numLengua = 0, numUltimate = 0;
@@ -71,6 +72,8 @@ public class TacoStand
 	 */
 	public static boolean orderSupplies(double budget)
 	{
+		if(budget <= TacoStand.totalFunds)
+		{
 		//tacos cost 75 cents each in supplies, keeping it simple
 	    int tacosEach = (int)(Math.round(budget / 0.75 / 4));
 
@@ -82,9 +85,12 @@ public class TacoStand
 			TacoStand.numPollo += tacosEach;
 			TacoStand.numLengua += tacosEach;
 			TacoStand.numUltimate += tacosEach;
+
 			return true;
+
 		}
-		else {
+		else
+		{
             return false;
         }
 
@@ -99,22 +105,50 @@ public class TacoStand
 	 */
 	public static <tacoOption> void updateTotalFunds(int tacoOption, int numTacos)
 	{
-				{
-				// Carne Asada ($2.50)
-					TacoStand.numAsada -= numTacos;
-					TacoStand.totalFunds += (2.50 * numTacos);
-				// Pollo Asado ($1.75)
-					TacoStand.numPollo -= numTacos;
-					TacoStand.totalFunds += (1.75 * numTacos);
-				// Lengua ($3.00)
-					TacoStand.numLengua -= numTacos;
-					TacoStand.totalFunds += (3.00 * numTacos);
-				// Ultimate Taco ($18.00)
-					TacoStand.numUltimate -= numTacos;
-					TacoStand.totalFunds += (18.00 * numTacos);
-			}
+		double cost;
 
+		switch(tacoOption)
+		{
+			case TacoStand.ASADA_OPTION:
+				cost = 2.5;
+				TacoStand.numAsada -= numTacos;
+				break;
+			case TacoStand.POLLO_OPTION:
+				cost = 1.75;
+				TacoStand.numPollo -= numTacos;
+				break;
+			case TacoStand.LENGUA_OPTION:
+				cost = 3.0;
+				TacoStand.numLengua -= numTacos;
+				break;
+			case TacoStand.ULTIMATE_OPTION:
+				cost = 18.0;
+				TacoStand.numUltimate -= numTacos;
+				break;
+			default:
+				cost = 0;
+				break;
+		}
+
+		TacoStand.totalFunds += cost *  numTacos;
 	}
+
+	/**
+	 * Determines if taco order can be fullfilled (number of tacos for specific kinda are available)
+	 * 
+	 * @param tacoOption menu option (kind of taco)
+	 * @param numTacos number of tacos as part of order
+	 * 
+	 * @return boolean representing if specific kind of tacos, for the number in order, are available
+	 */
+	public static boolean areTacosAvailable(int tacoOption, int numTacos)
+	{
+		if (numTacos <= 0) {
+			return false;
+		}
+        return false;
+    }
+}
 	
 	
 	/**
